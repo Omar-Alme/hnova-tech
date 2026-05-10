@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import { useEffect, useMemo, useState, type CSSProperties } from "react";
-import { Nav } from "./nav";
 import { IconArrow, IconChevron, IconCloud } from "./icons";
 import { Reveal } from "./reveal";
+import AnimatedTextCycle from "./ui/animated-text-cycle";
 
 function Particles({ count = 60 }: { count?: number }) {
   const items = useMemo(
@@ -77,34 +77,22 @@ export function Hero() {
       {mounted && <Particles count={64} />}
       <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-ink-950 z-10" />
 
-      <Nav />
-
       <div className="relative z-20 flex-1 flex flex-col justify-end pb-20 sm:pb-28 pt-36">
         <div className="mx-auto max-w-7xl w-full px-6 sm:px-10">
-          {/* Pill chip + cert badges */}
+
+          {/* Announcement chip */}
           <Reveal>
-            <div className="flex flex-wrap items-center gap-3">
-              <div className="inline-flex items-center gap-2.5 glass rounded-full pl-1.5 pr-5 py-1.5 text-[12px] tracking-wide text-white/85">
-                <span className="h-6 w-6 rounded-full grid place-items-center bg-white/10 border border-white/15">
-                  <svg
-                    width="11"
-                    height="11"
-                    viewBox="0 0 12 12"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.6"
-                  >
-                    <path d="M6 1v10M1 6h10" />
-                  </svg>
-                </span>
-                <span>Cloud · Infrastructure · Networking</span>
+            <div className="flex flex-wrap items-center gap-3 mb-7">
+              <div className="inline-flex items-center gap-2.5 rounded-full border border-white/10 px-4 py-1.5 text-[11px] font-mono tracking-[0.15em] uppercase text-white/55">
+                <span className="h-1.5 w-1.5 rounded-full bg-glow-blue shadow-[0_0_8px_3px_oklch(0.72_0.18_255_/_0.7)]" />
+                Cloud · Infrastructure · Networking
               </div>
 
               <div className="flex items-center gap-2">
                 {certificates.map((c) => (
                   <div
                     key={c.src}
-                    className="relative h-9 w-9 sm:h-10 sm:w-10 grid place-items-center"
+                    className="relative h-9 w-9 sm:h-10 sm:w-10"
                     title={c.alt}
                   >
                     <Image
@@ -120,7 +108,7 @@ export function Hero() {
             </div>
           </Reveal>
 
-          <div className="mt-7 grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
             <Reveal delay={0.1} className="lg:col-span-9">
               <h1 className="font-display font-medium text-[clamp(2.6rem,7vw,6rem)] leading-[0.95] tracking-[-0.035em] max-w-[16ch]">
                 <span
@@ -141,19 +129,23 @@ export function Hero() {
                 >
                   & Infrastructure
                 </span>
-                <span
-                  className="block bg-clip-text text-transparent"
-                  style={{
-                    backgroundImage:
-                      "linear-gradient(180deg, #5d6688 0%, #262c4a 100%)",
-                  }}
-                >
-                  for Modern Business.
+                <span className="block text-white/45 text-[0.82em] tracking-[-0.02em] inline-flex flex-wrap items-baseline gap-x-[0.2em]">
+                  {"for "}
+                  <AnimatedTextCycle
+                    words={[
+                      "Modern Enterprises",
+                      "Growing Businesses",
+                      "Canadian IT Teams",
+                      "Mission-Critical Ops",
+                    ]}
+                    interval={3000}
+                    className="text-white/70"
+                  />
                 </span>
               </h1>
             </Reveal>
 
-            {/* Spinning cloud emblem — aligned with the last headline row, on the right */}
+            {/* Spinning cloud emblem */}
             <div className="hidden lg:flex lg:col-span-3 justify-end items-end">
               <Reveal delay={0.35}>
                 <div className="relative h-32 w-32 xl:h-36 xl:w-36">
@@ -188,9 +180,9 @@ export function Hero() {
           </div>
 
           <Reveal delay={0.25}>
-            <p className="mt-8 max-w-xl text-[14px] sm:text-[15px] leading-relaxed text-white/65">
-              Cloud systems, networking, telecom, and IT support — engineered hands-on for
-              growing Canadian enterprises.
+            <p className="mt-8 max-w-xl text-[14px] sm:text-[15px] leading-relaxed text-white/55">
+              Cloud systems, networking, telecom, and IT support — engineered
+              hands-on for growing Canadian enterprises.
             </p>
           </Reveal>
 
@@ -204,7 +196,7 @@ export function Hero() {
               </a>
               <a
                 href="#services"
-                className="btn-secondary glass-light rounded-none px-6 py-3.5 text-sm font-medium inline-flex items-center gap-2 text-white/85"
+                className="btn-secondary glass-light rounded-none px-6 py-3.5 text-sm font-medium inline-flex items-center gap-2 text-white/75"
               >
                 Explore Services <IconChevron size={15} />
               </a>

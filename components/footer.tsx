@@ -22,7 +22,7 @@ function FooterCol({ title, links }: { title: string; links: string[] }) {
 
 export function Footer() {
   return (
-    <footer className="relative bg-ink-950 curve-up pt-16 pb-10 overflow-hidden">
+    <footer className="relative bg-ink-950 pt-16 pb-10 overflow-hidden">
       <div className="divider-glow" />
       <div className="mx-auto max-w-6xl px-6 sm:px-8 mt-14">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">

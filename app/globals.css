@@ -281,7 +281,7 @@ body {
           mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
 
-/* Underline form fields */
+/* Underline form fields (legacy) */
 .field {
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   transition: border-color 0.3s;
@@ -296,6 +296,31 @@ body {
   color: inherit;
   outline: none;
   width: 100%;
+}
+
+/* Contact form inputs */
+.contact-input {
+  display: block;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  padding: 0.625rem 0.875rem;
+  outline: none;
+  transition: border-color 0.25s, background 0.25s, box-shadow 0.25s;
+}
+.contact-input::placeholder {
+  color: var(--color-muted-dim);
+}
+.contact-input:focus {
+  border-color: oklch(0.72 0.18 255 / 0.6);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 0 3px oklch(0.72 0.18 255 / 0.08);
+}
+option {
+  background: #080a14;
 }
 
 /* Buttons */
@@ -334,6 +359,17 @@ body {
 }
 .ps-arrow {
   transition: transform 0.4s ease, color 0.4s;
+}
+
+/* Glass form card on light section: keep dark glass but deepen it slightly */
+.section-light .glass {
+  background: rgba(10, 14, 31, 0.88);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Field borders inside light section (they're inside dark glass so stay white-alpha) */
+.section-light .field {
+  border-color: rgba(255, 255, 255, 0.13);
 }
 
 /* Light-section colour overrides for white-alpha utility classes used across components */

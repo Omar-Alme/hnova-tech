@@ -1,10 +1,27 @@
 import { IconArrow } from "./icons";
 import { Reveal } from "./reveal";
+import { SparklesCore } from "./ui/sparkles";
 
 export function FinalCTA() {
   return (
-    <section className="relative bg-ink-950 curve-up py-24 sm:py-36 overflow-hidden">
-      <div className="absolute inset-0">
+    <section className="relative bg-ink-950 py-24 sm:py-36 overflow-hidden">
+      {/* Top divider */}
+      <div className="divider-glow absolute top-0 inset-x-0" />
+
+      {/* Sparkles background */}
+      <SparklesCore
+        id="final-cta-sparkles"
+        className="absolute inset-0 w-full h-full"
+        background="transparent"
+        particleColor="#ffffff"
+        particleDensity={80}
+        minSize={0.6}
+        maxSize={1.4}
+        speed={1.5}
+      />
+
+      {/* Glow orbs */}
+      <div className="absolute inset-0 pointer-events-none">
         <div
           className="glow-orb"
           style={{
@@ -25,9 +42,9 @@ export function FinalCTA() {
             background: "oklch(0.55 0.18 295 / 0.3)",
           }}
         />
-        <div className="absolute inset-0 stars opacity-40" />
       </div>
-      <div className="relative mx-auto max-w-5xl px-6 sm:px-8 text-center">
+
+      <div className="relative z-10 mx-auto max-w-5xl px-6 sm:px-8 text-center">
         <Reveal>
           <div className="text-[11px] font-mono tracking-[0.22em] uppercase text-glow-blue mb-6">
             — Get started

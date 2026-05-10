@@ -1,6 +1,8 @@
 "use client";
 
 import type { CSSProperties, ComponentType, MouseEvent } from "react";
+import { motion } from "motion/react";
+import { Reveal } from "./reveal";
 import {
   IconArrow,
   IconCloud,
@@ -11,7 +13,6 @@ import {
   IconShield,
   type IconProps,
 } from "./icons";
-import { Reveal } from "./reveal";
 
 type Svc = {
   Ic: ComponentType<IconProps>;
@@ -101,9 +102,21 @@ export function Services() {
           </div>
         </Reveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/[0.06] rounded-none overflow-hidden border border-white/[0.07]">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/[0.06] rounded-none overflow-hidden border border-white/[0.07]"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "0px 0px -80px 0px" }}
+          variants={{ visible: { transition: { staggerChildren: 0.07 } } }}
+        >
           {services.map((s, i) => (
-            <Reveal key={s.t} delay={i * 0.05}>
+            <motion.div
+              key={s.t}
+              variants={{
+                hidden: { opacity: 0, y: 20, filter: "blur(6px)" },
+                visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.8, ease: [0.2, 0.7, 0.2, 1] } },
+              }}
+            >
               <div
                 onMouseMove={handleMove}
                 className="svc-card relative bg-ink-950 p-7 sm:p-8 min-h-[260px] flex flex-col group h-full"
@@ -136,9 +149,9 @@ export function Services() {
                   <IconArrow size={12} className="ps-arrow" />
                 </div>
               </div>
-            </Reveal>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

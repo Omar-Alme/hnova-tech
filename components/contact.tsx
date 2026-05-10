@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, type ChangeEvent, type FormEvent, type ReactNode } from "react";
+import { useState, type ChangeEvent, type ReactNode } from "react";
+import { motion } from "motion/react";
 import { IconArrow, IconCheck, IconLinkedin, IconMail, IconPhone } from "./icons";
 import { Reveal } from "./reveal";
 
@@ -14,11 +15,11 @@ const services = [
   "Not sure yet",
 ];
 
-function Label({ children }: { children: ReactNode }) {
+function FieldLabel({ children }: { children: ReactNode }) {
   return (
-    <div className="text-[11px] font-mono tracking-[0.18em] uppercase text-muted-dim">
+    <label className="block text-[10px] font-mono tracking-[0.2em] uppercase text-muted-dim mb-2">
       {children}
-    </div>
+    </label>
   );
 }
 
@@ -34,17 +35,15 @@ type FieldProps = {
 function Field({ label, v, onChange, type = "text", placeholder, required }: FieldProps) {
   return (
     <div>
-      <Label>{label}</Label>
-      <div className="field py-3">
-        <input
-          type={type}
-          value={v}
-          onChange={onChange}
-          placeholder={placeholder}
-          required={required}
-          className="bg-transparent text-sm placeholder:text-muted-dim w-full"
-        />
-      </div>
+      <FieldLabel>{label}</FieldLabel>
+      <input
+        type={type}
+        value={v}
+        onChange={onChange}
+        placeholder={placeholder}
+        required={required}
+        className="contact-input"
+      />
     </div>
   );
 }
@@ -65,7 +64,7 @@ export function Contact() {
     (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
       setForm((f) => ({ ...f, [k]: e.target.value }));
 
-  const submit = (e: FormEvent) => {
+  const submit = (e: { preventDefault(): void }) => {
     e.preventDefault();
     setSent(true);
     setTimeout(() => setSent(false), 4000);
@@ -83,51 +82,60 @@ export function Contact() {
           left: "-10%",
           width: 480,
           height: 480,
-          background: "oklch(0.6 0.18 270 / 0.18)",
+          background: "oklch(0.6 0.18 270 / 0.16)",
         }}
       />
+
       <div className="mx-auto max-w-6xl px-6 sm:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-          <Reveal className="lg:col-span-5">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+
+          {/* Left column */}
+          <Reveal className="lg:col-span-5 lg:pt-2">
             <div className="text-[11px] font-mono tracking-[0.22em] uppercase text-glow-blue mb-4">
               — Contact
             </div>
             <h2 className="font-display font-medium text-[clamp(2rem,4.5vw,3.5rem)] leading-[1.05] tracking-tight">
               Start a conversation.
             </h2>
-            <p className="mt-6 text-sm text-muted max-w-md">
-              Tell us about your infrastructure challenge. A senior engineer — not a sales rep
-              — will reply within one business day.
+            <p className="mt-5 text-sm text-muted leading-relaxed max-w-sm">
+              Tell us about your infrastructure challenge. A senior engineer — not a sales
+              rep — will reply within one business day.
             </p>
 
-            <div className="mt-12 space-y-5 text-sm">
-              <div className="flex items-center gap-3 text-white/80">
-                <div className="h-9 w-9 rounded-full glass-light grid place-items-center">
-                  <IconMail size={14} />
+            <div className="mt-10 space-y-4">
+              {[
+                { Icon: IconMail, text: "hello@hnovatech.ca" },
+                { Icon: IconPhone, text: "+1 (416) 555-0184" },
+                { Icon: IconLinkedin, text: "linkedin.com/company/hnovatech" },
+              ].map(({ Icon, text }) => (
+                <div key={text} className="flex items-center gap-3">
+                  <div className="h-8 w-8 rounded-full glass-light grid place-items-center shrink-0">
+                    <Icon size={13} className="text-white/70" />
+                  </div>
+                  <span className="text-sm text-muted">{text}</span>
                 </div>
-                <span>hello@hnovatech.ca</span>
+              ))}
+            </div>
+
+            <div className="mt-10 pt-8 border-t border-white/[0.06]">
+              <div className="text-[11px] font-mono tracking-[0.18em] uppercase text-muted-dim mb-4">
+                Response time
               </div>
-              <div className="flex items-center gap-3 text-white/80">
-                <div className="h-9 w-9 rounded-full glass-light grid place-items-center">
-                  <IconPhone size={14} />
-                </div>
-                <span>+1 (416) 555-0184</span>
-              </div>
-              <div className="flex items-center gap-3 text-white/80">
-                <div className="h-9 w-9 rounded-full glass-light grid place-items-center">
-                  <IconLinkedin size={14} />
-                </div>
-                <span>linkedin.com/company/hnovatech</span>
+              <div className="flex items-center gap-2">
+                <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_3px_rgba(52,211,153,0.5)]" />
+                <span className="text-sm text-white/70">
+                  Usually within{" "}
+                  <span className="text-white">1 business day</span>
+                </span>
               </div>
             </div>
           </Reveal>
 
-          <Reveal delay={0.1} className="lg:col-span-7">
-            <form
-              onSubmit={submit}
-              className="glass rounded-none p-7 sm:p-10 space-y-7"
-            >
-              <div className="grid sm:grid-cols-2 gap-7">
+          {/* Form */}
+          <Reveal delay={0.12} className="lg:col-span-7">
+            <form onSubmit={submit} className="space-y-5">
+
+              <div className="grid sm:grid-cols-2 gap-5">
                 <Field
                   label="Name"
                   v={form.name}
@@ -156,53 +164,55 @@ export function Contact() {
                   placeholder="+1 (___) ___-____"
                 />
               </div>
+
               <div>
-                <Label>Service Needed</Label>
-                <div className="field py-3">
-                  <select
-                    value={form.service}
-                    onChange={set("service")}
-                    className="bg-transparent text-white/90 text-sm w-full"
-                  >
-                    {services.map((s) => (
-                      <option key={s} className="bg-ink-900">
-                        {s}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+                <FieldLabel>Service Needed</FieldLabel>
+                <select
+                  value={form.service}
+                  onChange={set("service")}
+                  className="contact-input"
+                >
+                  {services.map((s) => (
+                    <option key={s} value={s} className="bg-ink-900 text-white">
+                      {s}
+                    </option>
+                  ))}
+                </select>
               </div>
+
               <div>
-                <Label>Message</Label>
-                <div className="field py-3">
-                  <textarea
-                    rows={4}
-                    value={form.message}
-                    onChange={set("message")}
-                    placeholder="Tell us about your project…"
-                    className="bg-transparent text-sm placeholder:text-muted-dim w-full resize-none"
-                  />
-                </div>
+                <FieldLabel>Message</FieldLabel>
+                <textarea
+                  rows={4}
+                  value={form.message}
+                  onChange={set("message")}
+                  placeholder="Tell us about your project…"
+                  className="contact-input resize-none"
+                />
               </div>
-              <div className="flex items-center justify-between flex-wrap gap-4 pt-2">
-                <p className="text-xs text-muted-dim max-w-xs">
+
+              {/* Footer row */}
+              <div className="flex items-center justify-between flex-wrap gap-4 pt-1">
+                <p className="text-xs text-muted-dim leading-relaxed max-w-[260px]">
                   By sending, you agree to our privacy practices. We&apos;ll never share your
                   details.
                 </p>
-                <button
+                <motion.button
                   type="submit"
+                  whileHover={{ y: -1 }}
+                  whileTap={{ scale: 0.98 }}
                   className="btn-primary rounded-none px-6 py-3.5 text-sm font-medium inline-flex items-center gap-2"
                 >
                   {sent ? (
                     <>
-                      <IconCheck size={14} /> Sent
+                      <IconCheck size={14} /> Message Sent
                     </>
                   ) : (
                     <>
-                      Send message <IconArrow size={14} />
+                      Send Message <IconArrow size={14} />
                     </>
                   )}
-                </button>
+                </motion.button>
               </div>
             </form>
           </Reveal>
