@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { IconArrow, IconLinkedin } from "./icons";
 import { Reveal } from "./reveal";
 
@@ -27,15 +28,17 @@ export function Founder() {
       <div className="mx-auto max-w-6xl px-6 sm:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           <Reveal className="lg:col-span-5">
-            <div className="relative aspect-[4/5] rounded-3xl overflow-hidden glass-light">
-              <div className="absolute inset-0 stripe-img" />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-transparent to-transparent" />
-              <div className="absolute inset-0 grid place-items-center">
-                <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-white/40 px-3 py-1.5 rounded-full border border-white/10 bg-black/30">
-                  founder portrait
-                </div>
-              </div>
-              <div className="absolute -inset-2 rounded-3xl ring-1 ring-glow-blue/20 pointer-events-none" />
+            <div className="relative aspect-[4/5] rounded-none overflow-hidden glass-light">
+              <Image
+                src="/hassan1.JPG"
+                alt="Hassan Al-Mehdar, Founder"
+                fill
+                priority
+                sizes="(min-width: 1024px) 40vw, 100vw"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink-950/70 via-ink-950/10 to-transparent" />
+              <div className="absolute -inset-2 rounded-none ring-1 ring-glow-blue/20 pointer-events-none" />
               <div className="absolute top-5 left-5 right-5 flex items-center justify-between font-mono text-[10px] tracking-[0.22em] uppercase text-white/50">
                 <span>HNT — 01</span>
                 <span>YYZ · CA</span>
@@ -75,7 +78,7 @@ export function Founder() {
               </p>
             </div>
 
-            <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-px bg-white/[0.06] rounded-2xl overflow-hidden border border-white/[0.07] max-w-2xl">
+            <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-px bg-white/[0.06] rounded-none overflow-hidden border border-white/[0.07] max-w-2xl">
               {stack.map(([k, v]) => (
                 <div key={k} className="bg-ink-950 px-4 py-4">
                   <div className="text-[11px] font-mono tracking-[0.16em] uppercase text-muted-dim">
@@ -89,13 +92,13 @@ export function Founder() {
             <div className="mt-10 flex items-center gap-3">
               <a
                 href="#contact"
-                className="btn-primary rounded-full px-5 py-3 text-sm font-medium inline-flex items-center gap-2"
+                className="btn-primary rounded-none px-5 py-3 text-sm font-medium inline-flex items-center gap-2"
               >
                 Talk to Hassan <IconArrow size={14} />
               </a>
               <a
                 href="#"
-                className="btn-secondary glass-light rounded-full px-5 py-3 text-sm inline-flex items-center gap-2 text-white/85"
+                className="btn-secondary glass-light rounded-none px-5 py-3 text-sm inline-flex items-center gap-2 text-white/85"
               >
                 <IconLinkedin size={14} /> LinkedIn
               </a>

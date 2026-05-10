@@ -101,7 +101,7 @@ export function Services() {
           </div>
         </Reveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/[0.06] rounded-3xl overflow-hidden border border-white/[0.07]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/[0.06] rounded-none overflow-hidden border border-white/[0.07]">
           {services.map((s, i) => (
             <Reveal key={s.t} delay={i * 0.05}>
               <div
@@ -119,7 +119,7 @@ export function Services() {
                 />
                 <div className="relative">
                   <div className="flex items-center justify-between">
-                    <div className="h-11 w-11 rounded-2xl glass-light grid place-items-center text-white/85 group-hover:text-white group-hover:border-glow-blue/40 transition">
+                    <div className="h-11 w-11 rounded-none glass-light grid place-items-center text-white/85 group-hover:text-white group-hover:border-glow-blue/40 transition">
                       <s.Ic size={20} />
                     </div>
                     <span className="font-mono text-[11px] text-muted-dim">

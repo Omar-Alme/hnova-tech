@@ -125,7 +125,7 @@ export function Contact() {
           <Reveal delay={0.1} className="lg:col-span-7">
             <form
               onSubmit={submit}
-              className="glass rounded-3xl p-7 sm:p-10 space-y-7"
+              className="glass rounded-none p-7 sm:p-10 space-y-7"
             >
               <div className="grid sm:grid-cols-2 gap-7">
                 <Field
@@ -191,7 +191,7 @@ export function Contact() {
                 </p>
                 <button
                   type="submit"
-                  className="btn-primary rounded-full px-6 py-3.5 text-sm font-medium inline-flex items-center gap-2"
+                  className="btn-primary rounded-none px-6 py-3.5 text-sm font-medium inline-flex items-center gap-2"
                 >
                   {sent ? (
                     <>

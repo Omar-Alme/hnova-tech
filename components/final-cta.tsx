@@ -50,13 +50,13 @@ export function FinalCTA() {
           <div className="mt-10 flex flex-wrap justify-center gap-3">
             <a
               href="#contact"
-              className="btn-primary rounded-full px-7 py-4 text-sm font-medium inline-flex items-center gap-2"
+              className="btn-primary rounded-none px-7 py-4 text-sm font-medium inline-flex items-center gap-2"
             >
               Book a Consultation <IconArrow size={15} />
             </a>
             <a
               href="#services"
-              className="btn-secondary glass-light rounded-full px-7 py-4 text-sm inline-flex items-center gap-2 text-white/85"
+              className="btn-secondary glass-light rounded-none px-7 py-4 text-sm inline-flex items-center gap-2 text-white/85"
             >
               Explore Services
             </a>

@@ -25,15 +25,23 @@ export function Nav() {
 
   return (
     <header className="fixed top-0 inset-x-0 z-40 px-4 sm:px-6 pt-4 sm:pt-5">
-      <nav
-        className={`mx-auto max-w-6xl glass rounded-full pl-5 pr-2 py-2 flex items-center justify-between transition-all duration-500 ${
-          scrolled ? "shadow-[0_20px_60px_-30px_rgba(80,120,255,0.5)]" : ""
-        }`}
-      >
-        <a href="#top" className="flex items-center">
+      <div className="mx-auto max-w-7xl flex items-center justify-between gap-4">
+        {/* Logo (left) */}
+        <a
+          href="#top"
+          className={`flex items-center glass rounded-full pl-3 pr-5 py-2 transition-all duration-500 ${
+            scrolled ? "shadow-[0_20px_60px_-30px_rgba(80,120,255,0.5)]" : ""
+          }`}
+        >
           <Logo />
         </a>
-        <div className="hidden md:flex items-center gap-1 text-[13px] text-white/70">
+
+        {/* Glass navbar (right) */}
+        <nav
+          className={`hidden md:flex items-center gap-1 glass rounded-full pl-3 pr-1 py-1 text-[13px] text-white/70 transition-all duration-500 ${
+            scrolled ? "shadow-[0_20px_60px_-30px_rgba(80,120,255,0.5)]" : ""
+          }`}
+        >
           {links.map(([l, h]) => (
             <a
               key={l}
@@ -43,23 +51,26 @@ export function Nav() {
               {l}
             </a>
           ))}
-        </div>
-        <a
-          href="#contact"
-          className="hidden md:inline-flex items-center gap-2 btn-primary rounded-full px-4 py-2 text-[13px] font-medium"
-        >
-          Book Consultation <IconArrow size={14} />
-        </a>
+          <a
+            href="#contact"
+            className="ml-2 btn-primary rounded-none px-4 py-2 text-[13px] font-medium inline-flex items-center gap-2"
+          >
+            Book Consultation <IconArrow size={14} />
+          </a>
+        </nav>
+
+        {/* Mobile toggle */}
         <button
           onClick={() => setOpen((o) => !o)}
-          className="md:hidden h-9 w-9 grid place-items-center rounded-full hover:bg-white/5"
+          className="md:hidden h-11 w-11 grid place-items-center rounded-full glass text-white/85"
           aria-label="Toggle navigation"
         >
           {open ? <IconClose size={18} /> : <IconMenu size={18} />}
         </button>
-      </nav>
+      </div>
+
       {open && (
-        <div className="md:hidden mx-auto max-w-6xl glass mt-2 rounded-3xl p-4 space-y-1">
+        <div className="md:hidden mx-auto max-w-7xl glass mt-2 rounded-3xl p-4 space-y-1">
           {links.map(([l, h]) => (
             <a
               key={l}
@@ -73,7 +84,7 @@ export function Nav() {
           <a
             href="#contact"
             onClick={() => setOpen(false)}
-            className="block mt-2 btn-primary rounded-full px-4 py-2.5 text-sm font-medium text-center"
+            className="block mt-2 btn-primary rounded-none px-4 py-2.5 text-sm font-medium text-center"
           >
             Book Consultation
           </a>

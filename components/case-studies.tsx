@@ -91,7 +91,7 @@ export function CaseStudies() {
               className={c.span}
               as="article"
             >
-              <article className="group relative overflow-hidden rounded-3xl glass-light p-7 sm:p-9 min-h-[420px] flex flex-col h-full">
+              <article className="group relative overflow-hidden rounded-none glass-light p-7 sm:p-9 min-h-[420px] flex flex-col h-full">
                 <div className="absolute inset-0 stripe-img opacity-60" />
                 <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-glow-blue/50 to-transparent" />
                 <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-glow-blue/10 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
