@@ -44,7 +44,7 @@ const services: Svc[] = [
   {
     Ic: IconRadio,
     t: "Telecom & Radio Systems",
-    d: "VoIP, LMR / P25 radio, dispatch, and mission-critical communications.",
+    d: "Motorola & Tait LMR / P25 programming, dispatch integration, and mission-critical comms.",
   },
   {
     Ic: IconSettings,

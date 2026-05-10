@@ -2,11 +2,18 @@ import Image from "next/image";
 import { IconArrow, IconLinkedin } from "./icons";
 import { Reveal } from "./reveal";
 
-const stack: [string, string][] = [
-  ["Cloud Systems", "AWS · Azure"],
-  ["Networking", "Cisco · Juniper"],
-  ["Telecom", "VoIP · P25"],
-  ["Enterprise", "Public sector"],
+const credentials = [
+  "CompTIA Cloud+",
+  "A+ Certified",
+  "AWS Solutions Architect",
+  "Google Cloud Professional",
+];
+
+const stack: { k: string; v: string }[] = [
+  { k: "Cloud", v: "AWS · Azure · GCP" },
+  { k: "Networking", v: "Cisco · BGP · MPLS" },
+  { k: "Telecom", v: "Motorola · Tait · P25" },
+  { k: "Sectors", v: "Enterprise · Public" },
 ];
 
 export function Founder() {
@@ -22,38 +29,38 @@ export function Founder() {
           right: "-10%",
           width: 520,
           height: 520,
-          background: "oklch(0.55 0.18 260 / 0.2)",
+          background: "oklch(0.55 0.18 260 / 0.1)",
         }}
       />
       <div className="mx-auto max-w-6xl px-6 sm:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+
+          {/* Portrait */}
           <Reveal className="lg:col-span-5">
-            <div className="relative aspect-[4/5] rounded-none overflow-hidden glass-light">
+            <figure className="relative aspect-[4/5] overflow-hidden">
               <Image
-                src="/hassan1.JPG"
-                alt="Hassan Al-Mehdar, Founder"
+                src="/hassan.png"
+                alt="Hassan Al-Mehdar — Founder & Network Integration Specialist at HNovaTech"
                 fill
                 priority
-                sizes="(min-width: 1024px) 40vw, 100vw"
-                className="object-cover"
+                quality={95}
+                sizes="(min-width: 1024px) 42vw, 100vw"
+                className="object-cover object-center"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink-950/70 via-ink-950/10 to-transparent" />
-              <div className="absolute -inset-2 rounded-none ring-1 ring-glow-blue/20 pointer-events-none" />
-              <div className="absolute top-5 left-5 right-5 flex items-center justify-between font-mono text-[10px] tracking-[0.22em] uppercase text-white/50">
-                <span>HNT — 01</span>
-                <span>YYZ · CA</span>
-              </div>
-              <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between">
-                <div className="font-mono text-[10px] tracking-[0.22em] uppercase text-white/60">
+              <div className="absolute inset-0 ring-1 ring-black/[0.06]" />
+              <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/35 to-transparent" />
+              <figcaption className="absolute bottom-5 left-5 right-5 flex items-end justify-between">
+                <div className="font-mono text-[10px] tracking-[0.22em] uppercase text-white/95">
                   Hassan Al-Mehdar
                 </div>
-                <div className="h-7 w-7 rounded-full grid place-items-center border border-white/15 bg-black/30">
-                  <span className="h-1.5 w-1.5 rounded-full bg-glow-blue shadow-[0_0_8px_2px_oklch(0.72_0.18_255_/_0.8)]" />
+                <div className="font-mono text-[10px] tracking-[0.22em] uppercase text-white/65">
+                  Ottawa · CA
                 </div>
-              </div>
-            </div>
+              </figcaption>
+            </figure>
           </Reveal>
 
+          {/* Right column */}
           <Reveal delay={0.1} className="lg:col-span-7">
             <div className="text-[11px] font-mono tracking-[0.22em] uppercase text-glow-blue mb-4">
               — Founder
@@ -61,46 +68,75 @@ export function Founder() {
             <h2 className="font-display font-medium text-[clamp(2rem,4.5vw,3.5rem)] leading-[1.05] tracking-tight">
               Hassan Al-Mehdar
             </h2>
-            <div className="mt-2 text-sm text-muted">
-              Founder & Network Integration Specialist
+            <div className="mt-3 text-sm text-muted">
+              Founder &amp; Network Integration Specialist
+              <span className="mx-2 text-muted-dim">·</span>
+              Ottawa, ON
             </div>
 
-            <div className="mt-8 space-y-4 text-[15px] leading-relaxed text-white/80 max-w-xl">
+            <div className="mt-7 space-y-4 text-[15px] leading-relaxed max-w-xl">
               <p>
-                15+ years engineering enterprise infrastructure across cloud, networking, and
-                telecom — including roles supporting TELUS Health, Shared Services Canada,
-                Intrado, and Axsera.
+                15+ years architecting and supporting critical infrastructure — from 9-1-1
+                emergency response systems at Intrado, to cloud-native operations at TELUS
+                Health, to government networks at Shared Services Canada and integrations at
+                Axsera.
               </p>
               <p className="text-muted">
-                A hands-on engineer first. HNovaTech exists to give growing Canadian businesses
-                the same caliber of integration work usually reserved for the largest enterprise
-                programs — without the agency layer.
+                A hands-on engineer first. HNovaTech exists to give growing Canadian
+                businesses the same caliber of integration work usually reserved for the
+                largest enterprise programs — without the agency layer.
               </p>
             </div>
 
-            <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-px bg-white/[0.06] rounded-none overflow-hidden border border-white/[0.07] max-w-2xl">
-              {stack.map(([k, v]) => (
-                <div key={k} className="bg-ink-950 px-4 py-4">
-                  <div className="text-[11px] font-mono tracking-[0.16em] uppercase text-muted-dim">
-                    {k}
-                  </div>
-                  <div className="mt-1 text-sm text-white/85">{v}</div>
-                </div>
-              ))}
+            {/* Credentials */}
+            <div className="mt-8">
+              <div className="text-[10px] font-mono tracking-[0.22em] uppercase text-muted-dim mb-3">
+                Credentials
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {credentials.map((c) => (
+                  <span
+                    key={c}
+                    className="text-[11px] font-mono tracking-[0.12em] uppercase border border-black/[0.1] px-3 py-1.5"
+                  >
+                    {c}
+                  </span>
+                ))}
+              </div>
             </div>
 
-            <div className="mt-10 flex items-center gap-3">
+            {/* Stack */}
+            <div className="mt-8 pt-8 border-t border-black/[0.07]">
+              <div className="text-[10px] font-mono tracking-[0.22em] uppercase text-muted-dim mb-5">
+                Stack &amp; Specializations
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-5">
+                {stack.map(({ k, v }) => (
+                  <div key={k}>
+                    <div className="text-[10px] font-mono tracking-[0.16em] uppercase text-muted-dim">
+                      {k}
+                    </div>
+                    <div className="mt-1.5 text-sm">{v}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* CTAs */}
+            <div className="mt-10 flex flex-wrap items-center gap-3">
               <a
                 href="#contact"
-                className="btn-primary rounded-none px-5 py-3 text-sm font-medium inline-flex items-center gap-2"
+                className="btn-primary rounded-none px-5 py-3 text-sm font-medium inline-flex items-center gap-2 text-white"
               >
                 Talk to Hassan <IconArrow size={14} />
               </a>
               <a
-                href="#"
-                className="btn-secondary glass-light rounded-none px-5 py-3 text-sm inline-flex items-center gap-2 text-white/85"
+                href="https://www.linkedin.com/in/hassanalmehdar/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-none px-5 py-3 text-sm font-medium inline-flex items-center gap-2 border border-black/[0.1] hover:bg-black/[0.03] transition-colors"
               >
-                <IconLinkedin size={14} /> LinkedIn
+                <IconLinkedin size={14} /> Connect on LinkedIn
               </a>
             </div>
           </Reveal>

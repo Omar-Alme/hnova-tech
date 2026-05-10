@@ -181,8 +181,9 @@ export function Hero() {
 
           <Reveal delay={0.25}>
             <p className="mt-8 max-w-xl text-[14px] sm:text-[15px] leading-relaxed text-white/55">
-              Cloud systems, networking, telecom, and IT support — engineered
-              hands-on for growing Canadian enterprises.
+              Ottawa-based IT solutions provider with 15+ years building cloud,
+              networking, telecom, and managed support for enterprise and public sector
+              across Canada.
             </p>
           </Reveal>
 

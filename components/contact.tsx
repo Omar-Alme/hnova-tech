@@ -104,17 +104,41 @@ export function Contact() {
 
             <div className="mt-10 space-y-4">
               {[
-                { Icon: IconMail, text: "hello@hnovatech.ca" },
-                { Icon: IconPhone, text: "+1 (416) 555-0184" },
-                { Icon: IconLinkedin, text: "linkedin.com/company/hnovatech" },
-              ].map(({ Icon, text }) => (
-                <div key={text} className="flex items-center gap-3">
-                  <div className="h-8 w-8 rounded-full glass-light grid place-items-center shrink-0">
+                {
+                  Icon: IconMail,
+                  text: "halmehdar@hnovatech.ca",
+                  href: "mailto:halmehdar@hnovatech.ca",
+                },
+                {
+                  Icon: IconPhone,
+                  text: "+1 (613) 262-1341",
+                  href: "tel:+16132621341",
+                },
+                {
+                  Icon: IconLinkedin,
+                  text: "linkedin.com/company/hnovatech-inc",
+                  href: "https://www.linkedin.com/company/hnovatech-inc/",
+                },
+              ].map(({ Icon, text, href }) => (
+                <a
+                  key={text}
+                  href={href}
+                  target={href.startsWith("http") ? "_blank" : undefined}
+                  rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  className="flex items-center gap-3 group"
+                >
+                  <div className="h-8 w-8 rounded-full glass-light grid place-items-center shrink-0 group-hover:bg-white/[0.08] transition-colors">
                     <Icon size={13} className="text-white/70" />
                   </div>
-                  <span className="text-sm text-muted">{text}</span>
-                </div>
+                  <span className="text-sm text-muted group-hover:text-white transition-colors">
+                    {text}
+                  </span>
+                </a>
               ))}
+            </div>
+
+            <div className="mt-6 text-xs font-mono tracking-[0.18em] uppercase text-muted-dim">
+              Gatineau, QC · Serving Canada
             </div>
 
             <div className="mt-10 pt-8 border-t border-white/[0.06]">
