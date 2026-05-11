@@ -113,7 +113,7 @@ const jsonLd = {
       contactPoint: {
         "@type": "ContactPoint",
         telephone: "+1-613-262-1341",
-        email: "halmehdar@hnovatech.ca",
+        email: "info@hnovatech.ca",
         contactType: "customer service",
         areaServed: "CA",
         availableLanguage: ["English", "French"],
@@ -140,7 +140,7 @@ const jsonLd = {
       name: "Hassan Al-Mehdar",
       jobTitle: "Founder & Network Integration Specialist",
       worksFor: { "@id": `${siteUrl}#organization` },
-      email: "halmehdar@hnovatech.ca",
+      email: "info@hnovatech.ca",
       telephone: "+1-613-262-1341",
       sameAs: ["https://www.linkedin.com/in/hassanalmehdar/"],
       alumniOf: {

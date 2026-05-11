@@ -96,9 +96,9 @@ export function Footer() {
               <li>
                 <a
                   className="hover:text-white text-white/70 inline-flex items-center gap-2 transition-colors"
-                  href="mailto:halmehdar@hnovatech.ca"
+                  href="mailto:info@hnovatech.ca"
                 >
-                  <IconMail size={13} /> halmehdar@hnovatech.ca
+                  <IconMail size={13} /> info@hnovatech.ca
                 </a>
               </li>
               <li>

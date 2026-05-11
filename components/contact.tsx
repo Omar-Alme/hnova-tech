@@ -338,8 +338,8 @@ export function Contact() {
               {[
                 {
                   Icon: IconMail,
-                  text: "halmehdar@hnovatech.ca",
-                  href: "mailto:halmehdar@hnovatech.ca",
+                  text: "info@hnovatech.ca",
+                  href: "mailto:info@hnovatech.ca",
                 },
                 {
                   Icon: IconPhone,
