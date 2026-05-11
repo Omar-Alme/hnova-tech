@@ -51,12 +51,6 @@ const certificates = [
   { src: "/certificates/googlecloudpro.png", alt: "Google Cloud Professional" },
 ];
 
-const proofPoints = [
-  ["15+", "Years in critical infrastructure"],
-  ["1 day", "Typical first response"],
-  ["Canada", "Remote and onsite delivery"],
-];
-
 const heroAudiences = [
   "Modern Enterprises",
   "Growing Businesses",
@@ -209,21 +203,6 @@ export function Hero() {
               >
                 Explore Services <IconChevron size={15} />
               </a>
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.38}>
-            <div className="mt-9 grid max-w-2xl grid-cols-1 gap-px overflow-hidden border border-white/[0.07] bg-white/[0.06] sm:grid-cols-3">
-              {proofPoints.map(([value, label]) => (
-                <div key={value} className="bg-ink-950/70 px-4 py-4">
-                  <div className="font-display text-xl tracking-tight text-white">
-                    {value}
-                  </div>
-                  <div className="mt-1 text-[11px] font-mono uppercase tracking-[0.14em] text-muted-dim">
-                    {label}
-                  </div>
-                </div>
-              ))}
             </div>
           </Reveal>
         </div>
