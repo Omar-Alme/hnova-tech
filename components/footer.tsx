@@ -28,9 +28,25 @@ function FooterCol({
 
 export function Footer() {
   return (
-    <footer className="relative bg-ink-950 pt-16 pb-10 overflow-hidden">
-      <div className="divider-glow" />
-      <div className="mx-auto max-w-6xl px-6 sm:px-8 mt-14">
+    <footer className="relative bg-[#070913] pt-14 pb-10 overflow-hidden">
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/[0.12] to-transparent" />
+      <div className="mx-auto max-w-6xl px-6 sm:px-8">
+        <div className="mb-14 flex flex-col gap-4 border-b border-white/[0.06] pb-8 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-glow-blue">
+              Canada-wide infrastructure partner
+            </div>
+            <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted">
+              Cloud, network, telecom, and support work delivered by hands-on senior engineering.
+            </p>
+          </div>
+          <a
+            href="#contact"
+            className="btn-secondary glass-light inline-flex items-center justify-center rounded-none px-5 py-3 text-sm text-white/85"
+          >
+            Start a project
+          </a>
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           <div>
             <Logo size={20} />

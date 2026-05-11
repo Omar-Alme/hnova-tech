@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Inter_Tight, JetBrains_Mono } from "next/font/google";
+import { faqs } from "@/components/faq";
 import "./globals.css";
 
 const interTight = Inter_Tight({
@@ -61,12 +62,21 @@ export const metadata: Metadata = {
     title: "HNovaTech — Cloud, Network & IT Infrastructure for Canadian Business",
     description:
       "15+ years engineering reliable cloud, networking, telecom & data center infrastructure for enterprise and public sector. Ottawa-based, Canada-wide.",
+    images: [
+      {
+        url: "/hassan.png",
+        width: 1200,
+        height: 1500,
+        alt: "Hassan Al-Mehdar, founder of HNovaTech",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "HNovaTech — Cloud & IT Infrastructure | Ottawa, Canada",
     description:
       "Reliable cloud, networking, telecom and IT support — engineered hands-on for growing Canadian enterprises.",
+    images: ["/hassan.png"],
   },
   robots: {
     index: true,
@@ -154,6 +164,18 @@ const jsonLd = {
         "Systems Integration & Engineering",
       ],
     },
+    {
+      "@type": "FAQPage",
+      "@id": `${siteUrl}#faq`,
+      mainEntity: faqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.q,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: faq.a,
+        },
+      })),
+    },
   ],
 };
 
@@ -168,7 +190,7 @@ export default function RootLayout({
       <body className="grain antialiased">
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
         />
         {children}
       </body>
