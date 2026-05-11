@@ -92,7 +92,7 @@ export function Nav() {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -8, scale: 0.98 }}
                   transition={{ duration: 0.2 }}
-                  className="md:hidden mx-auto max-w-7xl bg-ink-900 border border-white/10 mt-3 rounded-2xl p-3 space-y-0.5 shadow-2xl"
+                  className="pointer-events-auto md:hidden mx-auto max-w-7xl bg-ink-900 border border-white/10 mt-3 rounded-2xl p-3 space-y-0.5 shadow-2xl"
                 >
                   {links.map(([label, href]) => (
                     <a
@@ -182,7 +182,7 @@ export function Nav() {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -8 }}
                   transition={{ duration: 0.18 }}
-                  className="sm:hidden absolute top-[calc(100%+8px)] left-4 right-4 bg-ink-900 border border-white/10 rounded-2xl p-3 space-y-0.5 shadow-2xl"
+                  className="pointer-events-auto sm:hidden absolute top-[calc(100%+8px)] left-4 right-4 bg-ink-900 border border-white/10 rounded-2xl p-3 space-y-0.5 shadow-2xl"
                 >
                   {links.map(([label, href]) => (
                     <a

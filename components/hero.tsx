@@ -57,6 +57,13 @@ const proofPoints = [
   ["Canada", "Remote and onsite delivery"],
 ];
 
+const heroAudiences = [
+  "Modern Enterprises",
+  "Growing Businesses",
+  "Canadian IT Teams",
+  "Mission-Critical Ops",
+];
+
 export function Hero() {
   const [parallax, setParallax] = useState(0);
   const [mounted, setMounted] = useState(false);
@@ -116,7 +123,7 @@ export function Hero() {
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
             <Reveal delay={0.1} className="lg:col-span-9">
-              <h1 className="font-display font-medium text-[clamp(2.6rem,7vw,6rem)] leading-[0.95] tracking-[-0.035em] max-w-[16ch]">
+              <h1 className="font-display font-medium text-[clamp(2.1rem,10.5vw,3.35rem)] sm:text-[clamp(2.6rem,7vw,6rem)] leading-[0.98] sm:leading-[0.95] tracking-[-0.02em] sm:tracking-[-0.035em] max-w-[16ch]">
                 <span
                   className="block bg-clip-text text-transparent"
                   style={{
@@ -135,15 +142,10 @@ export function Hero() {
                 >
                   & Infrastructure
                 </span>
-                <span className="block text-white/45 text-[0.82em] tracking-[-0.02em] inline-flex flex-wrap items-baseline gap-x-[0.2em]">
+                <span className="block text-white/45 text-[0.74em] sm:text-[0.82em] tracking-[-0.01em] sm:tracking-[-0.02em]">
                   {"for "}
                   <AnimatedTextCycle
-                    words={[
-                      "Modern Enterprises",
-                      "Growing Businesses",
-                      "Canadian IT Teams",
-                      "Mission-Critical Ops",
-                    ]}
+                    words={heroAudiences}
                     interval={3000}
                     className="text-white/70"
                   />

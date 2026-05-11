@@ -21,12 +21,16 @@ export default function AnimatedTextCycle({
   useEffect(() => {
     if (measureRef.current) {
       const elements = measureRef.current.children;
-      if (elements.length > currentIndex) {
-        const newWidth = elements[currentIndex].getBoundingClientRect().width;
-        setWidth(`${newWidth}px`);
+      if (elements.length > 0) {
+        const maxWidth = Array.from(elements).reduce(
+          (largest, element) =>
+            Math.max(largest, element.getBoundingClientRect().width),
+          0,
+        );
+        setWidth(`${maxWidth}px`);
       }
     }
-  }, [currentIndex]);
+  }, [words]);
 
   useEffect(() => {
     const timer = setInterval(() => {
