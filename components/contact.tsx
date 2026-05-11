@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type ChangeEvent, type ReactNode } from "react";
+import { useState, type ChangeEvent, type FormEvent, type ReactNode } from "react";
 import { motion } from "motion/react";
 import { IconArrow, IconCheck, IconLinkedin, IconMail, IconPhone } from "./icons";
 import { Reveal } from "./reveal";
@@ -57,17 +57,45 @@ export function Contact() {
     service: services[0],
     message: "",
   });
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const set =
     <K extends keyof typeof form>(k: K) =>
     (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
       setForm((f) => ({ ...f, [k]: e.target.value }));
 
-  const submit = (e: { preventDefault(): void }) => {
+  const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSent(true);
-    setTimeout(() => setSent(false), 4000);
+    setStatus("sending");
+    setErrorMessage("");
+
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(form),
+    });
+
+    const result = (await response.json().catch(() => null)) as { error?: string } | null;
+
+    if (!response.ok) {
+      setStatus("error");
+      setErrorMessage(result?.error || "Something went wrong. Please email us directly.");
+      return;
+    }
+
+    setStatus("sent");
+    setForm({
+      name: "",
+      company: "",
+      email: "",
+      phone: "",
+      service: services[0],
+      message: "",
+    });
+    setTimeout(() => setStatus("idle"), 4000);
   };
 
   return (
@@ -215,6 +243,12 @@ export function Contact() {
                 />
               </div>
 
+              {status === "error" ? (
+                <p className="text-sm text-red-300" role="alert">
+                  {errorMessage}
+                </p>
+              ) : null}
+
               {/* Footer row */}
               <div className="flex items-center justify-between flex-wrap gap-4 pt-1">
                 <p className="text-xs text-muted-dim leading-relaxed max-w-[260px]">
@@ -223,11 +257,14 @@ export function Contact() {
                 </p>
                 <motion.button
                   type="submit"
+                  disabled={status === "sending"}
                   whileHover={{ y: -1 }}
                   whileTap={{ scale: 0.98 }}
-                  className="btn-primary rounded-none px-6 py-3.5 text-sm font-medium inline-flex items-center gap-2"
+                  className="btn-primary rounded-none px-6 py-3.5 text-sm font-medium inline-flex items-center gap-2 disabled:cursor-not-allowed disabled:opacity-70"
                 >
-                  {sent ? (
+                  {status === "sending" ? (
+                    "Sending..."
+                  ) : status === "sent" ? (
                     <>
                       <IconCheck size={14} /> Message Sent
                     </>
