@@ -53,7 +53,7 @@ export function TrustStrip() {
         <Reveal delay={0.1}>
           <div className="mt-14 sm:mt-16 flex items-center gap-4 text-[11px] font-mono tracking-[0.22em] uppercase text-muted-dim">
             <span className="h-px w-8 bg-black/15" />
-            <span>Engineered by alumni from</span>
+            <span>Experience across</span>
           </div>
         </Reveal>
 
