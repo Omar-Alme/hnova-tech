@@ -319,6 +319,16 @@ body {
   background: rgba(255, 255, 255, 0.05);
   box-shadow: 0 0 0 3px oklch(0.72 0.18 255 / 0.08);
 }
+.contact-select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.contact-input-error {
+  border-color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.08);
+}
 option {
   background: #080a14;
 }

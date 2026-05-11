@@ -1,8 +1,23 @@
 "use client";
 
-import { useState, type ChangeEvent, type FormEvent, type ReactNode } from "react";
-import { motion } from "motion/react";
-import { IconArrow, IconCheck, IconLinkedin, IconMail, IconPhone } from "./icons";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type ChangeEvent,
+  type FormEvent,
+  type ReactNode,
+} from "react";
+import { AnimatePresence, motion } from "motion/react";
+import {
+  IconArrow,
+  IconCheck,
+  IconChevron,
+  IconClose,
+  IconLinkedin,
+  IconMail,
+  IconPhone,
+} from "./icons";
 import { Reveal } from "./reveal";
 
 const services = [
@@ -14,6 +29,12 @@ const services = [
   "Systems Integration & Engineering",
   "Not sure yet",
 ];
+
+type Toast = {
+  tone: "success" | "error";
+  title: string;
+  message: string;
+};
 
 function FieldLabel({ children }: { children: ReactNode }) {
   return (
@@ -30,9 +51,10 @@ type FieldProps = {
   type?: string;
   placeholder?: string;
   required?: boolean;
+  error?: string;
 };
 
-function Field({ label, v, onChange, type = "text", placeholder, required }: FieldProps) {
+function Field({ label, v, onChange, type = "text", placeholder, required, error }: FieldProps) {
   return (
     <div>
       <FieldLabel>{label}</FieldLabel>
@@ -42,8 +64,116 @@ function Field({ label, v, onChange, type = "text", placeholder, required }: Fie
         onChange={onChange}
         placeholder={placeholder}
         required={required}
-        className="contact-input"
+        aria-invalid={Boolean(error)}
+        className={`contact-input ${error ? "contact-input-error" : ""}`}
       />
+      {error ? <FieldError>{error}</FieldError> : null}
+    </div>
+  );
+}
+
+function FieldError({ children }: { children: ReactNode }) {
+  return (
+    <div className="mt-2 w-fit max-w-full bg-white px-3 py-2 text-xs font-medium leading-snug text-ink-950 shadow-[0_10px_30px_rgba(0,0,0,0.28)]">
+      {children}
+    </div>
+  );
+}
+
+type ServiceSelectProps = {
+  value: string;
+  options: string[];
+  error?: string;
+  onChange: (value: string) => void;
+};
+
+function ServiceSelect({ value, options, error, onChange }: ServiceSelectProps) {
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) {
+      return;
+    }
+
+    const onPointerDown = (event: PointerEvent) => {
+      if (!rootRef.current?.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    };
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open]);
+
+  return (
+    <div ref={rootRef} className="relative">
+      <button
+        type="button"
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        aria-invalid={Boolean(error)}
+        onClick={() => setOpen((current) => !current)}
+        className={`contact-input contact-select-trigger gap-3 text-left ${
+          error ? "contact-input-error" : ""
+        }`}
+      >
+        <span className="truncate">{value}</span>
+        <IconChevron
+          size={16}
+          className={`shrink-0 text-white/55 transition-transform ${open ? "rotate-180" : ""}`}
+        />
+      </button>
+
+      <AnimatePresence>
+        {open ? (
+          <motion.div
+            initial={{ opacity: 0, y: 8, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 8, scale: 0.98 }}
+            transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute left-0 right-0 top-[calc(100%+0.5rem)] z-30 overflow-hidden border border-white/[0.1] bg-ink-900/95 p-1 shadow-[0_24px_70px_rgba(0,0,0,0.5)] backdrop-blur-xl"
+            role="listbox"
+          >
+            {options.map((option) => {
+              const selected = option === value;
+
+              return (
+                <button
+                  key={option}
+                  type="button"
+                  role="option"
+                  aria-selected={selected}
+                  onClick={() => {
+                    onChange(option);
+                    setOpen(false);
+                  }}
+                  className={`flex min-h-10 w-full items-center justify-between gap-3 px-3 py-2 text-left text-sm transition-colors ${
+                    selected
+                      ? "bg-white text-ink-950"
+                      : "text-white/82 hover:bg-white/[0.07] hover:text-white"
+                  }`}
+                >
+                  <span>{option}</span>
+                  {selected ? <IconCheck size={14} /> : null}
+                </button>
+              );
+            })}
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
+
+      {error ? <FieldError>{error}</FieldError> : null}
     </div>
   );
 }
@@ -59,16 +189,78 @@ export function Contact() {
   });
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [toast, setToast] = useState<Toast | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<Partial<Record<keyof typeof form, string>>>({});
+
+  useEffect(() => {
+    if (!toast) {
+      return;
+    }
+
+    const timer = window.setTimeout(() => setToast(null), 5200);
+
+    return () => window.clearTimeout(timer);
+  }, [toast]);
 
   const set =
     <K extends keyof typeof form>(k: K) =>
     (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
-      setForm((f) => ({ ...f, [k]: e.target.value }));
+      {
+        setForm((f) => ({ ...f, [k]: e.target.value }));
+        setFieldErrors((errors) => ({ ...errors, [k]: undefined }));
+      };
+
+  const setService = (service: string) => {
+    setForm((f) => ({ ...f, service }));
+    setFieldErrors((errors) => ({ ...errors, service: undefined }));
+  };
+
+  const validateForm = () => {
+    const errors: Partial<Record<keyof typeof form, string>> = {};
+    const email = form.email.trim();
+
+    if (!form.name.trim()) {
+      errors.name = "Please enter your name.";
+    }
+
+    if (!form.company.trim()) {
+      errors.company = "Please enter your company.";
+    }
+
+    if (!email) {
+      errors.email = "Please enter your email.";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errors.email = "Please enter a valid email address.";
+    }
+
+    if (!form.service.trim()) {
+      errors.service = "Please choose a service.";
+    }
+
+    if (!form.message.trim()) {
+      errors.message = "Please tell us a little about the project.";
+    }
+
+    return errors;
+  };
 
   const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus("sending");
     setErrorMessage("");
+
+    const errors = validateForm();
+
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
+      setStatus("error");
+      setToast({
+        tone: "error",
+        title: "A few details are missing",
+        message: "Please fill out the highlighted fields before sending.",
+      });
+      return;
+    }
 
     const response = await fetch("/api/contact", {
       method: "POST",
@@ -81,12 +273,24 @@ export function Contact() {
     const result = (await response.json().catch(() => null)) as { error?: string } | null;
 
     if (!response.ok) {
+      const message = result?.error || "Something went wrong. Please email us directly.";
       setStatus("error");
-      setErrorMessage(result?.error || "Something went wrong. Please email us directly.");
+      setErrorMessage(message);
+      setToast({
+        tone: "error",
+        title: "Message not sent",
+        message,
+      });
       return;
     }
 
     setStatus("sent");
+    setFieldErrors({});
+    setToast({
+      tone: "success",
+      title: "Message sent",
+      message: "Thanks. A senior engineer will reply within one business day.",
+    });
     setForm({
       name: "",
       company: "",
@@ -185,7 +389,7 @@ export function Contact() {
 
           {/* Form */}
           <Reveal delay={0.12} className="lg:col-span-7">
-            <form onSubmit={submit} className="space-y-5">
+            <form onSubmit={submit} noValidate className="space-y-5">
 
               <div className="grid sm:grid-cols-2 gap-5">
                 <Field
@@ -194,12 +398,15 @@ export function Contact() {
                   onChange={set("name")}
                   placeholder="Jane Doe"
                   required
+                  error={fieldErrors.name}
                 />
                 <Field
                   label="Company"
                   v={form.company}
                   onChange={set("company")}
                   placeholder="Acme Corp"
+                  required
+                  error={fieldErrors.company}
                 />
                 <Field
                   label="Email"
@@ -208,6 +415,7 @@ export function Contact() {
                   onChange={set("email")}
                   placeholder="jane@acme.com"
                   required
+                  error={fieldErrors.email}
                 />
                 <Field
                   label="Phone"
@@ -219,17 +427,12 @@ export function Contact() {
 
               <div>
                 <FieldLabel>Service Needed</FieldLabel>
-                <select
+                <ServiceSelect
                   value={form.service}
-                  onChange={set("service")}
-                  className="contact-input"
-                >
-                  {services.map((s) => (
-                    <option key={s} value={s} className="bg-ink-900 text-white">
-                      {s}
-                    </option>
-                  ))}
-                </select>
+                  options={services}
+                  onChange={setService}
+                  error={fieldErrors.service}
+                />
               </div>
 
               <div>
@@ -239,8 +442,13 @@ export function Contact() {
                   value={form.message}
                   onChange={set("message")}
                   placeholder="Tell us about your project…"
-                  className="contact-input resize-none"
+                  required
+                  aria-invalid={Boolean(fieldErrors.message)}
+                  className={`contact-input resize-none ${
+                    fieldErrors.message ? "contact-input-error" : ""
+                  }`}
                 />
+                {fieldErrors.message ? <FieldError>{fieldErrors.message}</FieldError> : null}
               </div>
 
               {status === "error" ? (
@@ -279,6 +487,55 @@ export function Contact() {
           </Reveal>
         </div>
       </div>
+
+      <AnimatePresence>
+        {toast ? (
+          <motion.div
+            role="status"
+            aria-live="polite"
+            initial={{ opacity: 0, y: 18, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 12, scale: 0.98 }}
+            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed bottom-5 right-5 z-50 w-[calc(100vw-2.5rem)] max-w-sm overflow-hidden border border-white/[0.1] bg-ink-900/90 p-4 shadow-[0_18px_60px_rgba(0,0,0,0.45)] backdrop-blur-xl sm:bottom-7 sm:right-7"
+          >
+            <div
+              className={`absolute inset-x-0 top-0 h-px ${
+                toast.tone === "success"
+                  ? "bg-emerald-300/80"
+                  : "bg-red-300/80"
+              }`}
+            />
+            <div className="flex gap-3">
+              <div
+                className={`mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-full border ${
+                  toast.tone === "success"
+                    ? "border-emerald-300/25 bg-emerald-300/10 text-emerald-200"
+                    : "border-red-300/25 bg-red-300/10 text-red-200"
+                }`}
+              >
+                {toast.tone === "success" ? (
+                  <IconCheck size={15} />
+                ) : (
+                  <IconClose size={15} />
+                )}
+              </div>
+              <div className="min-w-0 flex-1">
+                <div className="text-sm font-medium text-white">{toast.title}</div>
+                <p className="mt-1 text-sm leading-relaxed text-muted">{toast.message}</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setToast(null)}
+                className="grid h-7 w-7 shrink-0 place-items-center rounded-full text-white/45 transition-colors hover:bg-white/[0.06] hover:text-white"
+                aria-label="Dismiss notification"
+              >
+                <IconClose size={14} />
+              </button>
+            </div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </section>
   );
 }

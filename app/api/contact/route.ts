@@ -59,9 +59,9 @@ export async function POST(request: Request) {
   const service = clean(body.service);
   const message = clean(body.message);
 
-  if (!name || !email || !isEmail(email)) {
+  if (!name || !company || !email || !isEmail(email) || !service || !message) {
     return Response.json(
-      { error: "Please provide a valid name and email address." },
+      { error: "Please complete all required fields." },
       { status: 400 },
     );
   }
