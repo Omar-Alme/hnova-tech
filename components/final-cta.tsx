@@ -80,26 +80,6 @@ export function FinalCTA() {
           </div>
         </Reveal>
       </div>
-
-      <div className="relative z-10 mx-auto mt-16 max-w-6xl px-6 sm:px-8">
-        <Reveal delay={0.36}>
-          <div className="grid grid-cols-1 gap-px overflow-hidden border border-white/[0.08] bg-white/[0.06] sm:grid-cols-3">
-            {[
-              ["Discovery", "30-minute first conversation"],
-              ["Planning", "Practical roadmap and scope"],
-              ["Delivery", "Hands-on engineering support"],
-            ].map(([k, v]) => (
-              <div key={k} className="bg-ink-950/70 px-5 py-5 text-left">
-                <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-glow-blue">
-                  {k}
-                </div>
-                <div className="mt-2 text-sm text-white/78">{v}</div>
-              </div>
-            ))}
-          </div>
-        </Reveal>
-      </div>
-
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-[#070913]" />
     </section>
   );

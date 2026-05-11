@@ -46,7 +46,7 @@ export function FAQ() {
                   <span className="font-display text-xl font-medium tracking-tight text-ink-900">
                     {item.q}
                   </span>
-                  <span className="grid h-8 w-8 shrink-0 place-items-center border border-black/[0.08] text-muted transition-colors group-open:bg-ink-950 group-open:text-white">
+                  <span className="grid h-8 w-8 shrink-0 place-items-center border border-black/[0.08] text-muted">
                     <IconChevron
                       size={15}
                       className="transition-transform group-open:rotate-180"
