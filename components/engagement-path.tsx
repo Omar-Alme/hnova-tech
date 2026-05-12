@@ -1,5 +1,6 @@
 import { IconArrow } from "./icons";
 import { Reveal } from "./reveal";
+import { ServerStackLoader } from "./ui/server-stack-loader";
 
 const steps = [
   {
@@ -27,9 +28,12 @@ const steps = [
 export function EngagementPath() {
   return (
     <section className="relative section-light py-20 sm:py-28 overflow-hidden">
+      <div className="pointer-events-none absolute right-[6%] top-16 hidden xl:block">
+        <ServerStackLoader className="scale-[1.08]" />
+      </div>
       <div className="mx-auto max-w-6xl px-6 sm:px-8">
         <Reveal>
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-center">
             <div className="lg:col-span-5">
               <div className="text-[11px] font-mono tracking-[0.22em] uppercase text-glow-blue mb-4">
                 — Engagement path
