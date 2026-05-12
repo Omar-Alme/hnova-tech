@@ -323,7 +323,7 @@ export function CaseStudies() {
 
             <div className="relative">
               <div className="text-[11px] font-mono tracking-[0.22em] uppercase text-glow-blue mb-6">
-                — Example Solutions
+                — Projects We Have Shaped
               </div>
 
               <div className="flex items-start justify-between gap-6 flex-wrap">
@@ -338,16 +338,16 @@ export function CaseStudies() {
                   </h2>
                 </div>
                 <div className="flex items-center gap-2 sm:gap-3 shrink-0 pt-2">
-                  <button type="button" onClick={() => go(-1)} aria-label="Previous case" className="h-11 w-11 sm:h-12 sm:w-12 rounded-full bg-white text-ink-950 grid place-items-center shadow-[0_4px_20px_-6px_rgba(0,0,0,0.5)] hover:scale-105 active:scale-95 transition-transform">
+                  <button type="button" onClick={() => go(-1)} aria-label="Previous case" className="h-11 w-11 sm:h-12 sm:w-12 rounded-full bg-white text-ink-950 grid place-items-center shadow-[0_4px_20px_-6px_rgba(0,0,0,0.5)] hover:scale-105 active:scale-95 transition-transform cursor-pointer">
                     <IconArrow size={16} className="-scale-x-100" />
                   </button>
-                  <button type="button" onClick={() => go(1)} aria-label="Next case" className="h-11 w-11 sm:h-12 sm:w-12 rounded-full bg-white text-ink-950 grid place-items-center shadow-[0_4px_20px_-6px_rgba(0,0,0,0.5)] hover:scale-105 active:scale-95 transition-transform">
+                  <button type="button" onClick={() => go(1)} aria-label="Next case" className="h-11 w-11 sm:h-12 sm:w-12 rounded-full bg-white text-ink-950 grid place-items-center shadow-[0_4px_20px_-6px_rgba(0,0,0,0.5)] hover:scale-105 active:scale-95 transition-transform cursor-pointer">
                     <IconArrow size={16} />
                   </button>
                 </div>
               </div>
 
-              <div className="mt-12 sm:mt-16 relative min-h-[420px] sm:min-h-[360px]">
+              <div className="mt-10 sm:mt-12 relative min-h-[420px] sm:min-h-[360px]">
                 <AnimatePresence mode="wait" custom={direction}>
                   <motion.div
                     key={c.title}
@@ -389,14 +389,14 @@ export function CaseStudies() {
                       </div>
                     </div>
 
-                    <div className="lg:col-span-7">
+                    <div className="lg:col-span-7 lg:pt-2">
                       <h3 className="font-display font-medium text-2xl sm:text-[28px] tracking-tight text-white leading-tight">
                         {c.title}
                       </h3>
-                      <p className="mt-4 text-[15px] sm:text-base leading-relaxed text-white/70 max-w-2xl">
+                      <p className="mt-4 text-[15px] sm:text-base leading-relaxed text-white/75 max-w-2xl">
                         {c.desc}
                       </p>
-                      <div className="mt-8 grid grid-cols-3 gap-6 sm:gap-8 max-w-lg">
+                      <div className="mt-8 grid grid-cols-3 gap-5 sm:gap-7 max-w-[500px]">
                         {c.stats.map(([k, v]) => (
                           <AnimatedStat key={`${index}-${k}-${v}`} value={k} label={v} />
                         ))}
@@ -406,7 +406,7 @@ export function CaseStudies() {
                 </AnimatePresence>
               </div>
 
-              <div className="mt-10 sm:mt-12 flex items-center justify-between gap-6 flex-wrap">
+              <div className="mt-9 sm:mt-10 flex items-center justify-between gap-6 flex-wrap max-w-[620px]">
                 <div className="flex items-center gap-2 sm:gap-3">
                   {cases.map((cs, i) => (
                     <button
@@ -414,7 +414,7 @@ export function CaseStudies() {
                       type="button"
                       onClick={() => jump(i)}
                       aria-label={`Go to ${cs.tag} case`}
-                      className="group relative h-1 w-10 sm:w-14 overflow-hidden"
+                      className="group relative h-1 w-10 sm:w-14 overflow-hidden cursor-pointer"
                     >
                       <span className="absolute inset-0 bg-white/10 group-hover:bg-white/20 transition-colors" />
                       <motion.span
