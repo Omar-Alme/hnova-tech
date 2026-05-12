@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { ComponentType } from "react";
-import { AnimatePresence, motion, useInView } from "motion/react";
+import { AnimatePresence, motion, useInView, useReducedMotion } from "motion/react";
 import { Reveal } from "./reveal";
 import { IconArrow } from "./icons";
 
@@ -295,10 +295,43 @@ function AnimatedStat({ value, label }: { value: string; label: string }) {
 export function CaseStudies() {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(1);
+  const [isInteracting, setIsInteracting] = useState(false);
+  const [isManuallyPaused, setIsManuallyPaused] = useState(false);
+  const manualPauseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const prefersReducedMotion = useReducedMotion();
   const c = cases[index];
 
-  const go = (dir: 1 | -1) => { setDirection(dir); setIndex((i) => (i + dir + cases.length) % cases.length); };
-  const jump = (i: number) => { setDirection(i > index ? 1 : -1); setIndex(i); };
+  const pauseAfterManualControl = () => {
+    setIsManuallyPaused(true);
+    if (manualPauseTimer.current) clearTimeout(manualPauseTimer.current);
+    manualPauseTimer.current = setTimeout(() => setIsManuallyPaused(false), 7000);
+  };
+
+  const go = (dir: 1 | -1, manual = true) => {
+    if (manual) pauseAfterManualControl();
+    setDirection(dir);
+    setIndex((i) => (i + dir + cases.length) % cases.length);
+  };
+
+  const jump = (i: number) => {
+    pauseAfterManualControl();
+    if (i === index) return;
+    setDirection(i > index ? 1 : -1);
+    setIndex(i);
+  };
+
+  useEffect(() => {
+    if (prefersReducedMotion || isInteracting || isManuallyPaused) return;
+
+    const interval = setInterval(() => go(1, false), 7000);
+    return () => clearInterval(interval);
+  }, [index, isInteracting, isManuallyPaused, prefersReducedMotion]);
+
+  useEffect(() => {
+    return () => {
+      if (manualPauseTimer.current) clearTimeout(manualPauseTimer.current);
+    };
+  }, []);
 
   return (
     <section
@@ -321,7 +354,15 @@ export function CaseStudies() {
               style={{ bottom: "-20%", right: "-10%", width: 460, height: 460, background: "oklch(0.55 0.18 280 / 0.14)" }}
             />
 
-            <div className="relative">
+            <div
+              className="relative"
+              onMouseEnter={() => setIsInteracting(true)}
+              onMouseLeave={() => setIsInteracting(false)}
+              onFocusCapture={() => setIsInteracting(true)}
+              onBlurCapture={(event) => {
+                if (!event.currentTarget.contains(event.relatedTarget)) setIsInteracting(false);
+              }}
+            >
               <div className="text-[11px] font-mono tracking-[0.22em] uppercase text-glow-blue mb-6">
                 — Projects We Have Shaped
               </div>
