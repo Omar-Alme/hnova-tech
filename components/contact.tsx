@@ -370,7 +370,7 @@ export function Contact() {
             </div>
 
             <div className="mt-6 text-xs font-mono tracking-[0.18em] uppercase text-muted-dim">
-              Gatineau, QC · Serving Canada
+              Ottawa, ON · Serving Canada
             </div>
 
             <div className="mt-10 pt-8 border-t border-white/[0.06]">

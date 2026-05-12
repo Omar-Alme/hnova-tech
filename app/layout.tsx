@@ -105,9 +105,8 @@ const jsonLd = {
       foundingDate: "2024",
       address: {
         "@type": "PostalAddress",
-        addressLocality: "Gatineau",
-        addressRegion: "QC",
-        postalCode: "J9J 1K8",
+        addressLocality: "Ottawa",
+        addressRegion: "ON",
         addressCountry: "CA",
       },
       contactPoint: {
