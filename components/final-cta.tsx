@@ -4,7 +4,7 @@ import { SparklesCore } from "./ui/sparkles";
 
 export function FinalCTA() {
   return (
-    <section className="relative bg-ink-950 pt-24 pb-20 sm:pt-36 sm:pb-28 overflow-hidden">
+    <section className="relative bg-ink-950 pt-20 pb-20 sm:pt-28 sm:pb-24 overflow-hidden">
       {/* Top divider */}
       <div className="divider-glow absolute top-0 inset-x-0" />
 

@@ -336,12 +336,12 @@ export function CaseStudies() {
   return (
     <section
       id="work"
-      className="relative pt-12 sm:pt-20 overflow-hidden"
+      className="relative pt-10 sm:pt-16 overflow-hidden"
       style={{ background: "linear-gradient(180deg, #eef0f7 0%, #f6f7fb 100%)" }}
     >
       <div className="mx-auto px-3 sm:px-4 lg:px-6">
         <Reveal>
-          <div className="relative overflow-hidden rounded-t-[28px] sm:rounded-t-[36px] bg-ink-950 px-6 sm:px-12 lg:px-20 pt-14 sm:pt-20 pb-24 sm:pb-32 shadow-[0_-30px_80px_-30px_rgba(10,14,31,0.25)]">
+          <div className="relative overflow-hidden rounded-t-[28px] sm:rounded-t-[36px] bg-ink-950 px-6 sm:px-12 lg:px-20 pt-12 sm:pt-16 pb-20 sm:pb-24 shadow-[0_-30px_80px_-30px_rgba(10,14,31,0.25)]">
             <div
               className="glow-orb transition-all duration-700"
               style={{
@@ -388,7 +388,7 @@ export function CaseStudies() {
                 </div>
               </div>
 
-              <div className="mt-10 sm:mt-12 relative min-h-[420px] sm:min-h-[360px]">
+              <div className="mt-8 sm:mt-10 relative min-h-[390px] sm:min-h-[330px]">
                 <AnimatePresence mode="wait" custom={direction}>
                   <motion.div
                     key={c.title}
@@ -447,7 +447,7 @@ export function CaseStudies() {
                 </AnimatePresence>
               </div>
 
-              <div className="mt-9 sm:mt-10 flex items-center justify-between gap-6 flex-wrap max-w-[620px]">
+              <div className="mt-8 flex items-center justify-between gap-6 flex-wrap max-w-[620px]">
                 <div className="flex items-center gap-2 sm:gap-3">
                   {cases.map((cs, i) => (
                     <button

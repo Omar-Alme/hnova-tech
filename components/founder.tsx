@@ -20,7 +20,7 @@ export function Founder() {
   return (
     <section
       id="founder"
-      className="relative section-light curve-up py-24 sm:py-36 overflow-hidden"
+      className="relative section-light curve-up py-20 sm:py-24 overflow-hidden"
     >
       <div
         className="glow-orb"
@@ -33,7 +33,7 @@ export function Founder() {
         }}
       />
       <div className="mx-auto max-w-6xl px-6 sm:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
 
           {/* Portrait */}
           <Reveal className="lg:col-span-5">

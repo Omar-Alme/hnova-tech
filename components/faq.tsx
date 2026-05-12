@@ -22,7 +22,7 @@ export const faqs = [
 
 export function FAQ() {
   return (
-    <section className="relative section-light py-24 sm:py-32 overflow-hidden">
+    <section className="relative section-light py-20 sm:py-24 overflow-hidden">
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-6 sm:px-8 lg:grid-cols-12 lg:gap-16">
         <Reveal className="lg:col-span-4">
           <div className="text-[11px] font-mono tracking-[0.22em] uppercase text-glow-blue mb-4">

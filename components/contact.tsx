@@ -305,7 +305,7 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="relative bg-ink-950 curve-up py-24 sm:py-36 overflow-hidden"
+      className="relative bg-ink-950 curve-up py-20 sm:py-28 overflow-hidden"
     >
       <div
         className="glow-orb"
