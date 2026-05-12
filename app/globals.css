@@ -276,6 +276,16 @@ body {
   animation: marquee 40s linear infinite;
 }
 
+/* Case study schematic flow line */
+@keyframes cs-flow {
+  to {
+    stroke-dashoffset: -18;
+  }
+}
+.cs-flow {
+  animation: cs-flow 1.4s linear infinite;
+}
+
 .mask-fade {
   -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
           mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
