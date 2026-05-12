@@ -47,11 +47,18 @@ export function EngagementPath() {
           </div>
         </Reveal>
 
-        <div className="mt-12 grid grid-cols-1 gap-px overflow-hidden border border-black/[0.07] bg-black/[0.07] sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-black/[0.07] bg-black/[0.07] sm:grid-cols-2 lg:grid-cols-4">
           {steps.map((step, index) => (
             <Reveal key={step.n} delay={index * 0.06}>
-              <article className="group flex min-h-[250px] flex-col bg-[#f6f7fb] p-6 transition-colors hover:bg-white sm:p-7">
-                <div className="flex items-center justify-between">
+              <article className="group relative flex min-h-[260px] flex-col overflow-hidden bg-[#f6f7fb] p-6 transition-colors hover:bg-white sm:p-7">
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute -right-2 -bottom-6 select-none font-display font-medium leading-none text-ink-900/[0.04] group-hover:text-glow-blue/[0.10] transition-colors duration-500"
+                  style={{ fontSize: "9rem" }}
+                >
+                  {step.n}
+                </span>
+                <div className="relative flex items-center justify-between">
                   <span className="font-mono text-[11px] text-muted-dim">
                     ({step.n})
                   </span>
@@ -60,7 +67,7 @@ export function EngagementPath() {
                     className="text-muted-dim transition-transform group-hover:translate-x-1 group-hover:text-ink-950"
                   />
                 </div>
-                <div className="mt-auto pt-14">
+                <div className="relative mt-auto pt-14">
                   <h3 className="font-display text-2xl font-medium tracking-tight text-ink-900">
                     {step.title}
                   </h3>

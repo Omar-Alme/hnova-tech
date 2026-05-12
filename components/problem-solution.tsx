@@ -1,7 +1,16 @@
 import { IconArrow } from "./icons";
 import { Reveal } from "./reveal";
 
-const rows = [
+type Row = {
+  n: string;
+  problem: string;
+  pdesc: string;
+  solution: string;
+  sdesc: string;
+  tags: string[];
+};
+
+const rows: Row[] = [
   {
     n: "01",
     problem: "Outdated Infrastructure",
@@ -9,6 +18,7 @@ const rows = [
     solution: "Modernized stack — assessed, refactored, and migrated.",
     sdesc:
       "We audit your environment, design the target state, and execute zero-downtime cutovers.",
+    tags: ["Stack Assessment", "Zero-downtime", "Refactor"],
   },
   {
     n: "02",
@@ -18,6 +28,7 @@ const rows = [
     solution: "Phased migration with cost & security guardrails.",
     sdesc:
       "AWS / Azure / hybrid blueprints with FinOps controls and identity hardening built in.",
+    tags: ["AWS", "Azure", "Landing Zone", "FinOps"],
   },
   {
     n: "03",
@@ -27,6 +38,7 @@ const rows = [
     solution: "Managed services with SLA-backed response.",
     sdesc:
       "24/7 monitoring, change management, and a dedicated engineer who knows your stack.",
+    tags: ["24/7 NOC", "< 4hr SLA", "ITSM"],
   },
   {
     n: "04",
@@ -36,6 +48,7 @@ const rows = [
     solution: "Modern voice, data, and radio integration.",
     sdesc:
       "Carrier-grade VoIP, LMR/P25 systems, and resilient communication for mission-critical work.",
+    tags: ["P25 / LMR", "VoIP", "Motorola", "Dispatch"],
   },
 ];
 
@@ -65,43 +78,54 @@ export function ProblemSolution() {
           </div>
         </Reveal>
 
-        <Reveal delay={0.1}>
-          <div className="divide-y divide-white/[0.07] border-y border-white/[0.07]">
-            {rows.map((r) => (
-              <div
-                key={r.n}
-                className="ps-row group grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 py-10 sm:py-12 px-2 sm:px-4"
-              >
-                <div className="lg:col-span-1 font-mono text-xs text-muted-dim pt-1">
+        <div className="space-y-4 sm:space-y-5">
+          {rows.map((r, i) => (
+            <Reveal key={r.n} delay={i * 0.06}>
+              <div className="ps-row group relative grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 rounded-2xl bg-white border border-black/[0.05] shadow-[0_1px_2px_rgba(10,14,31,0.04),0_8px_24px_-12px_rgba(10,14,31,0.08)] p-7 sm:p-9 transition-shadow hover:shadow-[0_1px_2px_rgba(10,14,31,0.04),0_18px_40px_-18px_rgba(10,14,31,0.18)]">
+                <div className="lg:col-span-1 font-mono text-xs text-muted-dim">
                   ({r.n})
                 </div>
                 <div className="lg:col-span-5">
-                  <div className="text-[11px] font-mono tracking-[0.18em] uppercase text-rose-400/70 mb-3">
+                  <div className="text-[11px] font-mono tracking-[0.18em] uppercase text-rose-500/80 mb-3">
                     Problem
                   </div>
-                  <h3 className="font-display font-medium text-2xl sm:text-3xl leading-tight tracking-tight text-white/95">
+                  <h3 className="font-display font-medium text-2xl sm:text-3xl leading-tight tracking-tight text-ink-900">
                     {r.problem}
                   </h3>
                   <p className="mt-3 text-[13px] sm:text-sm text-muted max-w-md">
                     {r.pdesc}
                   </p>
                 </div>
-                <div className="lg:col-span-6 lg:pl-8 lg:border-l lg:border-white/5">
+                <div className="lg:col-span-6 lg:pl-8 lg:border-l lg:border-black/[0.06] relative">
+                  <span
+                    aria-hidden
+                    className="hidden lg:block absolute left-0 top-0 h-10 w-px bg-glow-blue/60"
+                  />
                   <div className="flex items-center gap-2 text-[11px] font-mono tracking-[0.18em] uppercase text-glow-blue mb-3">
                     <span>Solution</span>
                     <IconArrow size={12} className="ps-arrow" />
                   </div>
-                  <h3 className="font-display font-medium text-2xl sm:text-3xl leading-tight tracking-tight text-white">
+                  <h3 className="font-display font-medium text-2xl sm:text-3xl leading-tight tracking-tight text-ink-900">
                     {r.solution}
                   </h3>
                   <p className="mt-3 text-[13px] sm:text-sm text-muted max-w-lg">
                     {r.sdesc}
                   </p>
+                  <div className="mt-5 flex flex-wrap gap-1.5">
+                    {r.tags.map((t) => (
+                      <span
+                        key={t}
+                        className="inline-flex items-center rounded-full border border-black/[0.08] bg-black/[0.02] px-2.5 py-1 text-[10.5px] font-mono tracking-[0.08em] text-ink-900/70"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
-            ))}
-          </div>
-        </Reveal>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   );

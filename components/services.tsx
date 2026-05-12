@@ -18,6 +18,8 @@ type Svc = {
   Ic: ComponentType<IconProps>;
   t: string;
   d: string;
+  metric: string;
+  tags: string[];
 };
 
 const services: Svc[] = [
@@ -25,31 +27,43 @@ const services: Svc[] = [
     Ic: IconCloud,
     t: "Cloud Solutions & Migration",
     d: "AWS, Azure, hybrid. Lift-and-shift, refactor, FinOps & landing zones.",
+    metric: "38% avg. TCO reduction",
+    tags: ["AWS", "Azure", "GCP", "FinOps"],
   },
   {
     Ic: IconNetwork,
     t: "Network Design & Integration",
     d: "SD-WAN, segmentation, zero-trust topology, end-to-end visibility.",
+    metric: "Zero-trust ready",
+    tags: ["SD-WAN", "BGP", "Zero Trust"],
   },
   {
     Ic: IconShield,
     t: "Managed IT Support",
     d: "24/7 monitoring, incident response, change management, and SLA-backed care.",
+    metric: "< 4hr response SLA",
+    tags: ["24/7 NOC", "ITSM", "Patching"],
   },
   {
     Ic: IconServer,
     t: "Data Center Infrastructure",
     d: "Compute, storage, virtualization, and DR — designed for resilience.",
+    metric: "99.99% uptime target",
+    tags: ["VMware", "Storage", "DR"],
   },
   {
     Ic: IconRadio,
     t: "Telecom & Radio Systems",
     d: "Motorola & Tait LMR / P25 programming, dispatch integration, and mission-critical comms.",
+    metric: "Mission-critical grade",
+    tags: ["Motorola", "Tait", "P25"],
   },
   {
     Ic: IconSettings,
     t: "Systems Integration & Engineering",
     d: "Custom integrations, automation pipelines, and platform engineering.",
+    metric: "End-to-end automation",
+    tags: ["Terraform", "APIs", "CI/CD"],
   },
 ];
 
@@ -103,7 +117,7 @@ export function Services() {
         </Reveal>
 
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/[0.06] rounded-none overflow-hidden border border-white/[0.07]"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/[0.06] rounded-2xl overflow-hidden border border-white/[0.07]"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "0px 0px -80px 0px" }}
@@ -119,7 +133,7 @@ export function Services() {
             >
               <div
                 onMouseMove={handleMove}
-                className="svc-card relative bg-ink-950 p-7 sm:p-8 min-h-[260px] flex flex-col group h-full"
+                className="svc-card relative bg-ink-950 p-7 sm:p-8 min-h-[300px] flex flex-col group h-full"
               >
                 <div
                   className="svc-glow absolute -inset-px pointer-events-none"
@@ -132,7 +146,7 @@ export function Services() {
                 />
                 <div className="relative">
                   <div className="flex items-center justify-between">
-                    <div className="h-11 w-11 rounded-none glass-light grid place-items-center text-white/85 group-hover:text-white group-hover:border-glow-blue/40 transition">
+                    <div className="h-11 w-11 rounded-xl glass-light grid place-items-center text-white/85 group-hover:text-white group-hover:border-glow-blue/40 transition">
                       <s.Ic size={20} />
                     </div>
                     <span className="font-mono text-[11px] text-muted-dim">
@@ -143,10 +157,26 @@ export function Services() {
                     {s.t}
                   </h3>
                   <p className="mt-3 text-sm text-muted leading-relaxed">{s.d}</p>
+                  <div className="mt-5 inline-flex items-center gap-2 text-[11px] font-mono tracking-[0.12em] uppercase text-glow-blue">
+                    <span className="h-1 w-1 rounded-full bg-glow-blue" />
+                    {s.metric}
+                  </div>
                 </div>
-                <div className="mt-auto pt-6 flex items-center gap-2 text-[12px] text-white/60 group-hover:text-white transition-colors">
-                  <span>Learn more</span>
-                  <IconArrow size={12} className="ps-arrow" />
+                <div className="relative mt-auto pt-6 flex items-center justify-between gap-3">
+                  <div className="flex flex-wrap gap-1.5">
+                    {s.tags.map((t) => (
+                      <span
+                        key={t}
+                        className="inline-flex items-center rounded-full border border-white/[0.08] bg-white/[0.02] px-2 py-0.5 text-[10px] font-mono tracking-[0.05em] text-white/55"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                  <IconArrow
+                    size={12}
+                    className="ps-arrow shrink-0 text-white/40 group-hover:text-white transition-colors"
+                  />
                 </div>
               </div>
             </motion.div>
