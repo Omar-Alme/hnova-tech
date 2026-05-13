@@ -88,7 +88,7 @@ export default function ContactConfirmation({
                             fontFamily: font,
                           }}
                         >
-                          HNova<span style={{ color: c.blue }}>Tech</span>
+                          HNova<span style={{ opacity: 0.78 }}>Tech</span>
                         </span>
                       </td>
                     </tr>
