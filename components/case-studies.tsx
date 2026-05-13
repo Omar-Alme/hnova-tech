@@ -221,7 +221,7 @@ const cases: Case[] = [
   {
     tag: "Cloud",
     title: "Enterprise Cloud Migration",
-    desc: "Hybrid landing zone for a 2,400-seat enterprise. Lift-shift-refactor across 14 workloads with 0% downtime — landing zones, FinOps controls, and IAM hardening baked in from day one.",
+    desc: "Hybrid landing zone for a 2,400-seat enterprise. Lift-shift-refactor across 14 workloads with 0% downtime. Landing zones, FinOps controls, and IAM hardening baked in from day one.",
     stats: [["14", "Workloads"], ["38%", "TCO reduction"], ["0", "Downtime hrs"]],
     accent: "oklch(0.72 0.18 255)",
     Visual: CloudCostVisual,

@@ -51,7 +51,7 @@ export function Footer() {
           <div>
             <Logo size={20} />
             <p className="mt-5 text-sm text-muted max-w-xs leading-relaxed">
-              Ottawa-based IT solutions provider — cloud, network, telecom, and managed
+              Ottawa-based IT solutions provider. Cloud, network, telecom, and managed
               support, engineered hands-on for growing Canadian businesses.
             </p>
             <div className="mt-5 text-[11px] font-mono tracking-[0.18em] uppercase text-muted-dim">
@@ -114,7 +114,7 @@ export function Footer() {
         </div>
 
         <div className="mt-16 pt-8 border-t border-white/[0.06] flex items-center justify-between flex-wrap gap-4 text-xs text-muted-dim font-mono tracking-[0.14em] uppercase">
-          <div>© {new Date().getFullYear()} HNovaTech Inc. — Ottawa, Ontario</div>
+          <div>© {new Date().getFullYear()} HNovaTech Inc. · Ottawa, Ontario</div>
           <div className="flex items-center gap-2">
             <IconMaple size={12} className="text-glow-blue" />
             <span>Built in Canada</span>

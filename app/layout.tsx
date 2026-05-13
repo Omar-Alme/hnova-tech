@@ -28,7 +28,7 @@ const siteUrl = "https://hnovatech.ca";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "HNovaTech — Cloud, Network & IT Infrastructure | Ottawa, Canada",
+    default: "HNovaTech | Cloud, Network & IT Infrastructure | Ottawa, Canada",
     template: "%s | HNovaTech",
   },
   description:
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     locale: "en_CA",
     url: siteUrl,
     siteName: "HNovaTech Inc.",
-    title: "HNovaTech — Cloud, Network & IT Infrastructure for Canadian Business",
+    title: "HNovaTech | Cloud, Network & IT Infrastructure for Canadian Business",
     description:
       "15+ years engineering reliable cloud, networking, telecom & data center infrastructure for enterprise and public sector. Ottawa-based, Canada-wide.",
     images: [
@@ -75,9 +75,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "HNovaTech — Cloud & IT Infrastructure | Ottawa, Canada",
+    title: "HNovaTech | Cloud & IT Infrastructure | Ottawa, Canada",
     description:
-      "Reliable cloud, networking, telecom and IT support — engineered hands-on for growing Canadian enterprises.",
+      "Reliable cloud, networking, telecom and IT support. Engineered hands-on for growing Canadian enterprises.",
     images: ["/hassan.png"],
   },
   robots: {

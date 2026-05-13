@@ -76,15 +76,15 @@ export function Founder() {
 
             <div className="mt-7 space-y-4 text-[15px] leading-relaxed max-w-xl">
               <p>
-                15+ years architecting and supporting critical infrastructure — from 9-1-1
-                emergency response systems at Intrado, to cloud-native operations at TELUS
-                Health, to government networks at Shared Services Canada and integrations at
+                15+ years architecting and supporting critical infrastructure: 9-1-1
+                emergency response systems at Intrado, cloud-native operations at TELUS
+                Health, government networks at Shared Services Canada, and integrations at
                 Axsera.
               </p>
               <p className="text-muted">
                 A hands-on engineer first. HNovaTech exists to give growing Canadian
                 businesses the same caliber of integration work usually reserved for the
-                largest enterprise programs — without the agency layer.
+                largest enterprise programs, without the agency layer.
               </p>
             </div>
 

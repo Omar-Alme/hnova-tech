@@ -47,7 +47,7 @@ const services: Svc[] = [
   {
     Ic: IconServer,
     t: "Data Center Infrastructure",
-    d: "Compute, storage, virtualization, and DR — designed for resilience.",
+    d: "Compute, storage, virtualization, and DR. Built for resilience.",
     metric: "99.99% uptime target",
     tags: ["VMware", "Storage", "DR"],
   },

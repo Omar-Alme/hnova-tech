@@ -338,8 +338,7 @@ export function Contact() {
               Start a conversation.
             </h2>
             <p className="mt-5 text-sm text-muted leading-relaxed max-w-sm">
-              Tell us about your infrastructure challenge. A senior engineer — not a sales
-              rep — will reply within one business day.
+              Tell us about your infrastructure challenge. A senior engineer will reply within one business day.
             </p>
 
             <div className="mt-10 space-y-4">

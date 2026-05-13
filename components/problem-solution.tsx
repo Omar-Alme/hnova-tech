@@ -15,7 +15,7 @@ const rows: Row[] = [
     n: "01",
     problem: "Outdated Infrastructure",
     pdesc: "Legacy hardware, sprawl, and brittle systems holding back velocity.",
-    solution: "Modernized stack — assessed, refactored, and migrated.",
+    solution: "Modernized stack: assessed, refactored, and migrated.",
     sdesc:
       "We audit your environment, design the target state, and execute zero-downtime cutovers.",
     tags: ["Stack Assessment", "Zero-downtime", "Refactor"],
@@ -34,7 +34,7 @@ const rows: Row[] = [
     n: "03",
     problem: "Unreliable IT Support",
     pdesc:
-      "Long ticket times, knowledge silos, and reactive — not proactive — operations.",
+      "Long ticket times, knowledge silos, and reactive (not proactive) operations.",
     solution: "Managed services with SLA-backed response.",
     sdesc:
       "24/7 monitoring, change management, and a dedicated engineer who knows your stack.",
