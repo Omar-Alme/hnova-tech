@@ -318,6 +318,14 @@ export function Contact() {
         }}
       />
 
+      <div aria-hidden="true" className="pointer-events-none absolute bottom-0 right-0 translate-x-[5%] translate-y-[20%] opacity-[0.05]">
+        <svg width="280" height="280" viewBox="0 0 64 64" fill="none">
+          <path d="M11 14 L25 14 L17 50 L3 50 Z" fill="white"/>
+          <path d="M29 14 L43 14 L35 50 L21 50 Z" fill="white"/>
+          <path d="M47 14 L61 14 L53 50 L39 50 Z" fill="white"/>
+        </svg>
+      </div>
+
       <div className="mx-auto max-w-6xl px-6 sm:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
 
