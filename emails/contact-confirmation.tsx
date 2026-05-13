@@ -28,9 +28,7 @@ const c = {
 
 const font = "Arial, 'Helvetica Neue', Helvetica, sans-serif";
 
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://hnovatech.ca");
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hnovatech.ca";
 
 export type ContactConfirmationProps = {
   name: string;
